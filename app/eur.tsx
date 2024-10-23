@@ -1,7 +1,7 @@
 import { Image, StyleSheet, Text, View } from "react-native";
 import { Button } from "../components/button";
 import { useEffect, useState } from "react";
-import { getUSD } from "../services/awesome.api";
+import { getEUR } from "../services/awesome.api";
 
 export default function Screen() {
   const [loading, setLoading] = useState(true);
@@ -9,9 +9,9 @@ export default function Screen() {
 
   const updateCurrency = async () => {
     setLoading(true);
-    const dolar = await getUSD();
+    const euro = await getEUR();
     setLoading(false);
-    setCurrentValue(dolar);
+    setCurrentValue(euro);
   };
 
   useEffect(() => {
@@ -21,7 +21,7 @@ export default function Screen() {
   return (
     <View style={styles.container}>
       <Image
-        source={require("../assets/dolar.png")}
+        source={require("../assets/euro.png")}
         resizeMode="contain"
         style={styles.logo}
       />
@@ -30,7 +30,7 @@ export default function Screen() {
 
       {!loading && (
         <>
-          <Text style={styles.h2}>O dólar americano está:</Text>
+          <Text style={styles.h2}>O euro está:</Text>
           <Text style={styles.currencyText}>R$ {currentValue.toFixed(2)}</Text>
           <Button label="Atualizar" onPress={updateCurrency} />
         </>
